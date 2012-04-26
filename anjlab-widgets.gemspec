@@ -4,9 +4,9 @@ require File.expand_path('../lib/anjlab-widgets/version', __FILE__)
 Gem::Specification.new do |gem|
   gem.authors       = ["Yury Korolev"]
   gem.email         = ["yury.korolev@gmail.com"]
-  gem.description   = %q{TODO: Write a gem description}
-  gem.summary       = %q{TODO: Write a gem summary}
-  gem.homepage      = ""
+  gem.description   = %q{Collection of UI widgets on top of anjlab-bootstrap-rails. Datepicker and Timepicker for now.}
+  gem.summary       = %q{Collection of UI widgets on top of anjlab-bootstrap-rails}
+  gem.homepage      = "https://github.com/anjlab/anjlab-widgets"
 
   gem.files         = `git ls-files`.split($\)
   gem.executables   = gem.files.grep(%r{^bin/}).map{ |f| File.basename(f) }
