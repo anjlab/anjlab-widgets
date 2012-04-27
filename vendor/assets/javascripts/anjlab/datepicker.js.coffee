@@ -55,9 +55,10 @@ DateTools =
 
   parseDate: (date, format) ->
     parts = date.split(format.separator)
-    date = new Date()
 
-    if parts.length == format.parts.length
+    if parts.length != format.parts.length
+      null
+    else
       for i in [0...format.parts.length]
         val = parseInt(parts[i], 10) || 1;
         switch format.parts[i]
@@ -69,11 +70,10 @@ DateTools =
             y = 2000 + val
           when 'yyyy'
             y = val
-      date = new Date(y, m , d)
-    
-    date
+      new Date(y, m, d)
   
   formatDate: (date, format) ->
+    return "" if date == null
     val = {
       d: date.getDate()
       m: date.getMonth() + 1
@@ -86,6 +86,10 @@ DateTools =
     for i in [0...format.parts.length]
       date.push val[format.parts[i]]
     date.join format.separator
+
+  today: ->
+    now = new Date()
+    new Date(now.getFullYear(), now.getMonth(), now.getDate(),0,0,0,0)
 
   getLocale: () ->
     $('html').prop('lang') || 'en'
@@ -126,7 +130,8 @@ class Datepicker
   constructor: (element, options)->
     @element = $(element)
     @locale  = options.locale || @element.data('date-locale') || DateTools.getLocale() 
-    @format  = DateTools.parseFormat(options.format || this.element.data('date-format') || Locales[@locale].dates.format);
+    @format  = DateTools.parseFormat(options.format || @element.data('date-format') || Locales[@locale].dates.format);
+    @allowBlank = options.allowBlank ? @element.data('date-allow-blank') ? true
     @picker  = $(DateTools.template).appendTo('body').on {
       click: $.proxy(@click, this)
       mousedown: $.proxy(@mousedown, this)
@@ -199,11 +204,17 @@ class Datepicker
 
   update: ->
     @date = DateTools.parseDate(
-      if @isInput then this.element.prop('value') else this.element.data('date'),
+      if @isInput then this.element.prop('value') else @element.data('date'),
       @format
     )
 
-    @viewDate = new Date(@date)
+    if @date == null && !@allowBlank
+      @date = DateTools.today()
+
+    if @date != null
+      @viewDate = @date
+    else
+      @viewDate = DateTools.today()
     @fill()
 
   fillDow: ->
@@ -231,20 +242,22 @@ class Datepicker
     d = new Date(@viewDate)
     year = d.getFullYear()
     month = d.getMonth()
-    currentDate = @date.valueOf()
+
+    date = if @date != null then @date else DateTools.today()
+    currentDate = if @date != null then @date.valueOf() else 0
 
     @picker.find('.datepicker-days th:eq(1)').text(Locales[@locale].dates.months[month]+' '+year)
     prevMonth = new Date(year, month-1, 28,0,0,0,0)
     day = DateTools.getDaysInMonth(prevMonth.getFullYear(), prevMonth.getMonth())
     prevMonth.setDate(day)
-    prevMonth.setDate(day - (prevMonth.getDay() - this.weekStart + 7)%7)
+    prevMonth.setDate(day - (prevMonth.getDay() - @weekStart + 7)%7)
     nextMonth = new Date(prevMonth);
     nextMonth.setDate(nextMonth.getDate() + 42)
     nextMonth = nextMonth.valueOf()
     html = [];
 
     while prevMonth.valueOf() < nextMonth
-      html.push '<tr>' if prevMonth.getDay() == this.weekStart
+      html.push '<tr>' if prevMonth.getDay() == @weekStart
         
       clsName = '';
       if prevMonth.getMonth() < month
@@ -262,10 +275,10 @@ class Datepicker
     
 
     @picker.find('.datepicker-days tbody').empty().append(html.join(''))
-    currentYear = this.date.getFullYear()
+    currentYear = date.getFullYear()
     
     months = @picker.find('.datepicker-months').find('th:eq(1)').text(year).end().find('span').removeClass('active')
-    months.eq(this.date.getMonth()).addClass('active') if currentYear == year
+    months.eq(date.getMonth()).addClass('active') if currentYear == year
 
     html = '';
     year = parseInt(year/10, 10) * 10
@@ -289,7 +302,7 @@ class Datepicker
             when 'prev', 'next'
               @viewDate['set'+DateTools.modes[this.viewMode].navFnc].call(
                 @viewDate,
-                @viewDate['get'+DateTools.modes[this.viewMode].navFnc].call(this.viewDate) + 
+                @viewDate['get'+DateTools.modes[this.viewMode].navFnc].call(@viewDate) + 
                 DateTools.modes[this.viewMode].navStep * (if target[0].className == 'prev' then -1 else 1))
               @fill()
         when 'span'
@@ -304,13 +317,13 @@ class Datepicker
         when 'td'
           if target.is('.day')
             day = parseInt(target.text(), 10) || 1
-            month = this.viewDate.getMonth()
+            month = @viewDate.getMonth()
             if target.is('.old')
               month -= 1
             else if target.is('.new')
               month += 1
             
-            year = this.viewDate.getFullYear()
+            year = @viewDate.getFullYear()
             @date = new Date(year, month, day,0,0,0,0);
             @viewDate = new Date(year, month, day,0,0,0,0);
             @fill()
