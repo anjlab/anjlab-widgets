@@ -26,7 +26,7 @@ module Anjlab
 
     def self.parse_date date_string
       begin
-        self.parse_date! date_string
+        parse_date! date_string
       rescue
         nil
       end
@@ -38,29 +38,29 @@ module Anjlab
     end
 
     def self.parse_time! time_string
-      return nil if date_string.blank?
+      return nil if time_string.blank?
       now = Time.now
       parts = time_string.split(':')
-      Time.local(now.year, now.month, day, parts[0], parts[1])
+      Time.local(now.year, now.month, now.day, parts[0].to_i, parts[1].to_i)
     end
 
     def self.parse_time time_string
       begin
-        self.parse_time! date_string
+        self.parse_time! time_string
       rescue
         nil
       end
     end
 
     def self.parse_datetime! date_string, time_string
-      date = parse_date date_string
-      time = parse_time time_string
+      date = parse_date! date_string
+      time = parse_time! time_string
       Time.local(date.year, date.month, date.day, time.hour, time.min)
     end
 
     def self.parse_datetime date_string, time_string
       begin
-        self.parse_datetime! date_string, time_string
+        parse_datetime! date_string, time_string
       rescue
         nil
       end
