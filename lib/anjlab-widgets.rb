@@ -15,7 +15,7 @@ module Anjlab
 
     end
 
-    def self.parse_date date_string
+    def self.parse_date! date_string
       return nil if date_string.blank?
       # native controls date format
       if date_string =~ /\d{4}-[01]\d-[0123]\d/
@@ -25,17 +25,41 @@ module Anjlab
       end
     end
 
-    def self.parse_time time_string
+    def self.parse_date date_string
+      begin
+        self.parse_date! date_string
+      rescue
+        nil
+      end
+    end
+
+    def self.parse_time! time_string
       return nil if date_string.blank?
       now = Time.now
       parts = time_string.split(':')
       Time.local(now.year, now.month, day, parts[0], parts[1])
     end
 
-    def self.parse_date_time date_string, time_string
+    def self.parse_time time_string
+      begin
+        self.parse_time! date_string
+      rescue
+        nil
+      end
+    end
+
+    def self.parse_datetime! date_string, time_string
       date = parse_date date_string
       time = parse_time time_string
       Time.local(date.year, date.month, date.day, time.hour, time.min)
+    end
+
+    def self.parse_datetime date_string, time_string
+      begin
+        self.parse_datetime! date_string, time_string
+      rescue
+        nil
+      end
     end
   end
 end
