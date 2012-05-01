@@ -12,7 +12,6 @@ module Anjlab
       else
         "%Y-%m-%d"
       end
-
     end
 
     def self.parse_date! date_string
@@ -31,6 +30,11 @@ module Anjlab
       rescue
         nil
       end
+    end
+
+    def self.format_date date
+      return '' if date.nil?
+      date.strftime self.date_format
     end
 
     def self.parse_time! time_string
@@ -60,6 +64,11 @@ module Anjlab
       rescue
         nil
       end
+    end
+
+    def self.format_time time
+      nil if time.nil?
+      time.strftime "%H:%M"
     end
   end
 end
