@@ -289,7 +289,7 @@ class Datepicker
       year += 1;
     yearCont.html html
 
-  click: (e)->
+  click: (e)=>
     e.stopPropagation()
     e.preventDefault()
     target = $(e.target).closest('span, td, th')
