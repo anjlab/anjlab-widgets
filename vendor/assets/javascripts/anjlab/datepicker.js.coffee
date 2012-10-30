@@ -332,6 +332,7 @@ class Datepicker
               type: 'changeDate'
               date: @date
             }
+            @hide()
 
   mousedown: (e)->
     e.stopPropagation()
