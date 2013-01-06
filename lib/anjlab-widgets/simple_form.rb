@@ -8,7 +8,7 @@ module Anjlab
 
       def input
         time = options[:value] || @builder.object[attribute_name]
-        puts options.inspect
+
         html = ''
 
         allow_blank = !options[:required]
