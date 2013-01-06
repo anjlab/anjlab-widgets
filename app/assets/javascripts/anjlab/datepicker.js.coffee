@@ -125,10 +125,40 @@ DateTools.template = '<div class="datepicker dropdown-menu">'+
             '</div>'+
           '</div>'
 
-class Datepicker
-
+class NativeRailsDatepicker
   constructor: (element, options)->
     @element = $(element)
+    @rails   = options['rails']
+
+    @element.on {
+      keyup: $.proxy(@update, this)
+      change: $.proxy(@update, this)
+    }
+
+  update: ->
+    @date = DateTools.parseDate @element.val(), {
+      separator: '-'
+      parts: ["yyyy", "mm", "dd"]
+    }
+
+    @updateRails()
+
+  updateRails: ->
+    return if !@rails
+
+    parent = @element.closest('.controls, form, div')
+    if @date == null
+      parent.find('.js-aw-year, .js-aw-month, .js-aw-day, .js-aw-hour, .js-aw-min').val('')
+    else
+      parent.find('.js-aw-year').val(@date.getFullYear())
+      parent.find('.js-aw-month').val(@date.getMonth() + 1)
+      parent.find('.js-aw-day').val(@date.getDate())      
+
+
+class Datepicker extends NativeRailsDatepicker
+
+  constructor: (element, options)->
+    super(element, options)
     @locale  = options.locale || @element.data('date-locale') || DateTools.getLocale() 
     @format  = DateTools.parseFormat(options.format || @element.data('date-format') || Locales[@locale].dates.format);
     @allowBlank = options.allowBlank ? @element.data('date-allow-blank') ? true
@@ -143,8 +173,9 @@ class Datepicker
     if @isInput
       @element.on {
         focus: $.proxy(@show, this)
+        click: $.proxy(@show, this)
         blur: $.proxy(@hide, this)
-        keyup: $.proxy(@update, this)  
+        keyup: $.proxy(@update, this)
       }
     else
       if @component
@@ -243,6 +274,7 @@ class Datepicker
     year = d.getFullYear()
     month = d.getMonth()
 
+    @updateRails()
     date = if @date != null then @date else DateTools.today()
     currentDate = if @date != null then @date.valueOf() else 0
 
@@ -365,6 +397,7 @@ $.fn.datepicker = (option) ->
     options = typeof option == 'object' && option
     if nativePicker      
       convertToNative($this, options)
+      $this.data('datepicker', (data = new NativeRailsDatepicker(this, $.extend({}, $.fn.timepicker.defaults,options))))
     else
       if !data
         $this.data('datepicker', (data = new Datepicker(this, $.extend({}, $.fn.datepicker.defaults,options))))
@@ -377,7 +410,9 @@ $ ->
   input = document.createElement("input")
   input.setAttribute("type", "date")
   # Chrome has ugly native date picker so we show ours
+  # nativePicker = input.type == "date"
   nativePicker = input.type == "date" && !navigator.userAgent.match(/chrome/i)
 
-  $("input[data-widget=datepicker]").datepicker()
+  $("input[data-widget=datepicker]").datepicker(rails: false)
+  $("input[data-widget=railsdatepicker]").datepicker(rails: true)
 

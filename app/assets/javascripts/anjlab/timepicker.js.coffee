@@ -2,10 +2,35 @@ TimeTools =
 
   template: "<div class='timepicker dropdown-menu'><div class='times'></div></div>"
 
-class Timepicker
-
+class NativeRailsTimepicker
   constructor: (element, options)->
     @element = $(element)
+    @rails   = options['rails']
+
+    @element.on {
+      keyup: $.proxy(@update, this)
+      change: $.proxy(@update, this)
+    }
+
+  update: ->
+    @time = @element.val()
+    @updateRails()
+
+  updateRails: ->
+    return if !@rails
+    parent = @element.closest('.controls, form, div')
+    parts = @time.split(':')
+    if parts.length == 2
+      parent.find('.js-aw-hour').val(parts[0])
+      parent.find('.js-aw-min').val(parts[1])
+    else
+      parent.find('.js-aw-hour, .js-aw-min').val('')
+
+class Timepicker extends NativeRailsTimepicker
+
+  constructor: (element, options)->
+    super(element, options)
+
     @picker  = $(TimeTools.template).appendTo('body').on({
       click: $.proxy(@click, this)
       mousedown: $.proxy(@mousedown, this)
@@ -13,13 +38,15 @@ class Timepicker
 
     @element.on {
       focus: $.proxy(@show, this)
+      click: $.proxy(@show, this)
       blur: $.proxy(@hide, this)
-      keyup: $.proxy(@update, this)  
+      
     }
 
     @step    = options.step || @element.data('date-time-step') || 30
     @minTime = options.minTime || @element.data('date-time-min') || 9 * 60
     @maxTime = options.maxTime || @element.data('date-time-max') || 20 * 60
+    
 
     @fillTimes()
     @update()
@@ -45,13 +72,14 @@ class Timepicker
         type: 'changeDate'
         date: @time
       }
+      @hide()
 
   mousedown: (e)->
     e.stopPropagation()
     e.preventDefault()
 
   update: ->
-    @time = this.element.val()
+    super()
     @picker.find('a.active').removeClass('active')
     @picker.find("a[data-time='#{@time}']").addClass('active')
 
@@ -113,11 +141,13 @@ nativePicker = false
 $.fn.timepicker = (option) ->
   @each ->
     $this = $(this)
+    options = typeof option == 'object' && option
     if nativePicker
       $this.prop("type", "time")
+
+      $this.data('timepicker', (data = new NativeRailsTimepicker(this, $.extend({}, $.fn.timepicker.defaults,options))))
     else
       data = $this.data('timepicker')
-      options = typeof option == 'object' && option
       if !data
         $this.data('timepicker', (data = new Timepicker(this, $.extend({}, $.fn.timepicker.defaults,options))))
       data[option]() if typeof option == 'string'
@@ -128,8 +158,9 @@ $.fn.timepicker.Constructor = Timepicker
 $ ->
   input = document.createElement("input")
   input.setAttribute("type", "time")
-  nativePicker = input.type == "time"
+  nativePicker = input.type == "time" && !navigator.userAgent.match(/chrome/i)
 
   $("input[data-widget=timepicker]").timepicker()
+  $("input[data-widget=railstimepicker]").timepicker(rails: true)
 
 

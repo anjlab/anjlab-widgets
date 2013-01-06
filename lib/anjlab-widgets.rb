@@ -70,5 +70,13 @@ module Anjlab
       nil if time.nil?
       time.strftime "%H:%M"
     end
+
+    def self.simple_form options={}
+      require 'anjlab-widgets/simple_form'
+      SimpleForm::FormBuilder.map_type :anjlab_date, :anjlab_time, :anjlab_datetime, to: DateTimeInput
+      if options[:as_default]
+        SimpleForm::FormBuilder.map_type :date, :time, :datetime, to: DateTimeInput
+      end
+    end
   end
 end
