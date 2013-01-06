@@ -34,15 +34,15 @@ Add date and time pickers to your application.css.scss
 @import 'anjlab/timepicker';
 ```
 
-With FormBuilder
+### With FormBuilder
 
-```ruby
+```erb
   <%= f.text_field :updated_at, value: Anjlab::Widgets.format_date(f.object.updated_at), "data-widget"=>"datepicker" %>
 
   <%= f.text_field :updated_at, value: Anjlab::Widgets.format_time(f.object.updated_at), "data-widget"=>"timepicker" %>
 ```
 
-With simple_form
+### With simple_form!
 
 You have two options here:
 
@@ -57,7 +57,7 @@ end
 ```
 In your forms:
 
-```ruby
+```erb
   <%= f.input :created_at # :datetime %>
   <%= f.input :created_at, as: :date %>
   <%= f.input :created_at, as: :time %>
@@ -75,7 +75,7 @@ end
 
 In your forms:
 
-```ruby
+```erb
   <%= f.input :created_at, as: :anjlab_datetime %>
   <%= f.input :created_at, as: :anjlab_date %>
   <%= f.input :created_at, as: :anjlab_time %>
