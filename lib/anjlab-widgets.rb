@@ -67,7 +67,7 @@ module Anjlab
     end
 
     def self.format_time time
-      nil if time.nil?
+      return '' if time.nil?
       time.strftime "%H:%M"
     end
 

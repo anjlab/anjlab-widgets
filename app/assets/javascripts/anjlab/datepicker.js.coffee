@@ -148,11 +148,11 @@ class NativeRailsDatepicker
 
     parent = @element.closest('.controls, form, div')
     if @date == null
-      parent.find('.js-aw-year, .js-aw-month, .js-aw-day, .js-aw-hour, .js-aw-min').val('')
+      parent.find('.js-aw-1i, .js-aw-2i, .js-aw-3i').val('')
     else
-      parent.find('.js-aw-year').val(@date.getFullYear())
-      parent.find('.js-aw-month').val(@date.getMonth() + 1)
-      parent.find('.js-aw-day').val(@date.getDate())      
+      parent.find('.js-aw-1i').val(@date.getFullYear())
+      parent.find('.js-aw-2i').val(@date.getMonth() + 1)
+      parent.find('.js-aw-3i').val(@date.getDate())      
 
 
 class Datepicker extends NativeRailsDatepicker

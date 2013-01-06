@@ -21,10 +21,10 @@ class NativeRailsTimepicker
     parent = @element.closest('.controls, form, div')
     parts = @time.split(':')
     if parts.length == 2
-      parent.find('.js-aw-hour').val(parts[0])
-      parent.find('.js-aw-min').val(parts[1])
+      parent.find('.js-aw-4i').val(parts[0])
+      parent.find('.js-aw-5i').val(parts[1])
     else
-      parent.find('.js-aw-hour, .js-aw-min').val('')
+      parent.find('.js-aw-4i, .js-aw-5i').val('')
 
 class Timepicker extends NativeRailsTimepicker
 
