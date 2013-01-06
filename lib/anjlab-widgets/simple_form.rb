@@ -14,7 +14,8 @@ module Anjlab
         allow_blank = !options[:required]
 
         date_data = {
-          "data-widget" => "railsdatepicker",
+          "data-widget" => "datepicker",
+          "data-rails" => true,
           "data-date-allow-blank" => allow_blank,
           :value => Widgets::format_date(time),
           :required => input_html_options[:required],
@@ -22,7 +23,8 @@ module Anjlab
         }
 
         time_data = {
-          "data-widget" => "railstimepicker",
+          "data-widget" => "timepicker",
+          "data-rails" => true,
           :value => Widgets::format_time(time),
           :required => input_html_options[:required],
           :class => "#{input_html_options[:time_class] || 'input-small'}"  

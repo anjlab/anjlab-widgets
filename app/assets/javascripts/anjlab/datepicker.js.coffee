@@ -128,7 +128,7 @@ DateTools.template = '<div class="datepicker dropdown-menu">'+
 class NativeRailsDatepicker
   constructor: (element, options)->
     @element = $(element)
-    @rails   = options['rails']
+    @rails   = options.rails ? @element.data('rails') ? false
 
     @element.on {
       keyup: $.proxy(@update, this)
@@ -395,13 +395,13 @@ $.fn.datepicker = (option) ->
     $this = $(this)
     data = $this.data('datepicker')
     options = typeof option == 'object' && option
-    if nativePicker      
-      convertToNative($this, options)
-      $this.data('datepicker', (data = new NativeRailsDatepicker(this, $.extend({}, $.fn.timepicker.defaults,options))))
-    else
-      if !data
+    if !data
+      if nativePicker
+        convertToNative($this, options)
+        $this.data('datepicker', (data = new NativeRailsDatepicker(this, $.extend({}, $.fn.timepicker.defaults,options))))
+      else
         $this.data('datepicker', (data = new Datepicker(this, $.extend({}, $.fn.datepicker.defaults,options))))
-      data[option]() if typeof option == 'string'
+    data[option]() if typeof option == 'string'
 
 $.fn.datepicker.defaults = { }
 $.fn.datepicker.Constructor = Datepicker
@@ -413,6 +413,5 @@ $ ->
   # nativePicker = input.type == "date"
   nativePicker = input.type == "date" && !navigator.userAgent.match(/chrome/i)
 
-  $("input[data-widget=datepicker]").datepicker(rails: false)
-  $("input[data-widget=railsdatepicker]").datepicker(rails: true)
-
+  $("input[data-widget=datepicker]").datepicker()
+  $(document).on 'focus.data-api click.data-api touchstart.data-api', 'input[data-widget=datepicker]', (e)-> $(e.target).datepicker()

@@ -5,7 +5,7 @@ TimeTools =
 class NativeRailsTimepicker
   constructor: (element, options)->
     @element = $(element)
-    @rails   = options['rails']
+    @rails   = options.rails ? @element.data('rails') ? false
 
     @element.on {
       keyup: $.proxy(@update, this)
@@ -141,26 +141,24 @@ nativePicker = false
 $.fn.timepicker = (option) ->
   @each ->
     $this = $(this)
+    data = $this.data('timepicker')
     options = typeof option == 'object' && option
-    if nativePicker
-      $this.prop("type", "time")
-
-      $this.data('timepicker', (data = new NativeRailsTimepicker(this, $.extend({}, $.fn.timepicker.defaults,options))))
-    else
-      data = $this.data('timepicker')
-      if !data
+    if !data
+      if nativePicker
+        $this.prop('type', 'time')
+        $this.data('timepicker', (data = new NativeRailsTimepicker(this, $.extend({}, $.fn.timepicker.defaults,options))))
+      else
         $this.data('timepicker', (data = new Timepicker(this, $.extend({}, $.fn.timepicker.defaults,options))))
-      data[option]() if typeof option == 'string'
+    data[option]() if typeof option == 'string'
 
 $.fn.timepicker.defaults = { }
 $.fn.timepicker.Constructor = Timepicker
 
 $ ->
-  input = document.createElement("input")
-  input.setAttribute("type", "time")
-  nativePicker = input.type == "time" && !navigator.userAgent.match(/chrome/i)
+  input = document.createElement('input')
+  input.setAttribute('type', 'time')
+  # skip ugly chrome native control for now
+  nativePicker = input.type == 'time' && !navigator.userAgent.match(/chrome/i)
 
   $("input[data-widget=timepicker]").timepicker()
-  $("input[data-widget=railstimepicker]").timepicker(rails: true)
-
-
+  $(document).on 'focus.data-api click.data-api touchstart.data-api', 'input[data-widget=timepicker]', (e)-> $(e.target).timepicker()
