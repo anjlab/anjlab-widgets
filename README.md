@@ -38,7 +38,6 @@ Add date and time pickers to your application.css.scss
 
 ```erb
   <%= f.text_field :updated_at, value: Anjlab::Widgets.format_date(f.object.updated_at), "data-widget"=>"datepicker" %>
-
   <%= f.text_field :updated_at, value: Anjlab::Widgets.format_time(f.object.updated_at), "data-widget"=>"timepicker" %>
 ```
 
@@ -81,6 +80,15 @@ In your forms:
   <%= f.input :created_at, as: :anjlab_time %>
 ```
 
+## Screen shots
+
+![date picker](https://raw.github.com/anjlab/anjlab-widgets/master/date_pic.png)
+
+![time picker](https://raw.github.com/anjlab/anjlab-widgets/master/time_pic.png)
+
+![native date picker](https://raw.github.com/anjlab/anjlab-widgets/master/native_date_pic.png)
+
+![native time picker](https://raw.github.com/anjlab/anjlab-widgets/master/native_time_pic.png)
 
 ## Contributing
 
