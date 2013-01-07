@@ -82,9 +82,14 @@ In your forms:
 
 ## Screen shots
 
+### Desktop
 ![date picker](https://raw.github.com/anjlab/anjlab-widgets/master/date_pic.png)
 
 ![time picker](https://raw.github.com/anjlab/anjlab-widgets/master/time_pic.png)
+
+### Mobile native
+
+Converts to native controls if possible (except Chrome - it has ugly native controls).
 
 ![native date picker](https://raw.github.com/anjlab/anjlab-widgets/master/native_date_pic.PNG)
 
