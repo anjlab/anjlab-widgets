@@ -86,9 +86,9 @@ In your forms:
 
 ![time picker](https://raw.github.com/anjlab/anjlab-widgets/master/time_pic.png)
 
-![native date picker](https://raw.github.com/anjlab/anjlab-widgets/master/native_date_pic.png)
+![native date picker](https://raw.github.com/anjlab/anjlab-widgets/master/native_date_pic.PNG)
 
-![native time picker](https://raw.github.com/anjlab/anjlab-widgets/master/native_time_pic.png)
+![native time picker](https://raw.github.com/anjlab/anjlab-widgets/master/native_time_pic.PNG)
 
 ## Contributing
 
