@@ -30,6 +30,8 @@ module Anjlab
           :class => "#{input_html_options[:time_class] || 'input-small'}"  
         }
 
+        default_parts = [''] * 5
+
         case input_type
         when :datetime, :anjlab_datetime
           html << @builder.text_field(attribute_name, date_data)
@@ -38,10 +40,12 @@ module Anjlab
         when :date, :anjlab_date
           html << @builder.text_field(attribute_name, date_data)
         when :time, :anjlab_time
+          now = Time.now
+          default_parts = [now.year, now.month, now.day, '', '']
           html << @builder.text_field(attribute_name, time_data)
         end
 
-        values = time ? [time.year, time.month, time.day, time.hour, time.min] : [''] * 5
+        values = time ? [time.year, time.month, time.day, time.hour, time.min] : default_parts
         values.each_with_index do |v, index|
           i = index + 1
           html << @builder.hidden_field("#{attribute_name}(#{i}i)", value: v,  class: "js-aw-#{i}i")
