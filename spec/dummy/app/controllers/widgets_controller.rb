@@ -7,4 +7,7 @@ class WidgetsController < ApplicationController
 
   def timepicker
   end
+
+  def simple_form
+  end
 end
