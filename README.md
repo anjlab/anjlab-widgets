@@ -93,9 +93,9 @@ In your forms:
 
 Converts to native controls if possible (except Chrome - it has ugly native controls).
 
-![native date picker](https://raw.github.com/anjlab/anjlab-widgets/master/native_date_pic.PNG)
+<img src="https://raw.github.com/anjlab/anjlab-widgets/master/native_date_pic.PNG" width="320" height="568">
 
-![native time picker](https://raw.github.com/anjlab/anjlab-widgets/master/native_time_pic.PNG)
+<img src="https://raw.github.com/anjlab/anjlab-widgets/master/native_time_pic.PNG" width="320" height="568">
 
 ## Contributing
 
