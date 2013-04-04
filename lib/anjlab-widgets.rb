@@ -9,6 +9,8 @@ module Anjlab
         "%d.%m.%Y"
       when :en
         "%m/%d/%Y"
+      when :es
+        "%Y-%m-%d"
       else
         "%Y-%m-%d"
       end

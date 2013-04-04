@@ -11,7 +11,7 @@ Locales =
   es:
     dates:
       format: 'yyyy-mm-dd'
-      weekStart: 0
+      weekStart: 1
       days: ["Domingo", "Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado", "Domingo"]
       daysShort: ["Dom", "Lun", "Mar", "Mie", "Jue", "Vie", "Sab", "Dom"]
       daysMin: ["Do", "Lu", "Ma", "Mi", "Ju", "Vi", "Sa", "Do"]
@@ -101,7 +101,7 @@ DateTools =
     new Date(now.getFullYear(), now.getMonth(), now.getDate(),0,0,0,0)
 
   getLocale: () ->
-    $('html').prop('lang') || 'en'
+    $('html').prop('lang') || 'es'
 
   headTemplate: '<thead>'+
             '<tr>'+
