@@ -10,7 +10,7 @@ Locales =
       monthsShort: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
   es:
     dates:
-      format: 'yyyy-mm-dd'
+      format: 'dd/mm/yyyy'
       weekStart: 1
       days: ["Domingo", "Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado", "Domingo"]
       daysShort: ["Dom", "Lun", "Mar", "Mie", "Jue", "Vie", "Sab", "Dom"]

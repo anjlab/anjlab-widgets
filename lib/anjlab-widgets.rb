@@ -10,7 +10,7 @@ module Anjlab
       when :en
         "%m/%d/%Y"
       when :es
-        "%Y-%m-%d"
+        "%d/%m/%Y"
       else
         "%Y-%m-%d"
       end
