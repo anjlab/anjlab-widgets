@@ -101,7 +101,7 @@ DateTools =
     new Date(now.getFullYear(), now.getMonth(), now.getDate(),0,0,0,0)
 
   getLocale: () ->
-    $('html').prop('lang') || 'es'
+    $('html').prop('lang') || 'en'
 
   headTemplate: '<thead>'+
             '<tr>'+
