@@ -1,5 +1,4 @@
-
-<%= simple_form_for OpenStruct.new(today: Date.today, now: Time.now), as: 'dates', url: '' do |f| %>
+<%= simple_form_for TestDate.new(today: Date.today, now: Time.now), url: '/' do |f| %>
   <%= f.input :today, as: :anjlab_date %>
   <%= f.input :now, as: :anjlab_time %>
   <%= f.input :now, as: :anjlab_datetime %>
