@@ -4,7 +4,7 @@ Bootstrap date and time pickers for rails (ready for rails 4).
 
 Note: `simple_form` gem is supported.
 
-Currently `en` and `ru` locales are supported.
+Currently `en`, `es` and `ru` locales are supported.
 
 Note: please use it with [bootstrap-rails](https://github.com/anjlab/bootstrap-rails)
 
