@@ -40,13 +40,11 @@ class Timepicker extends NativeRailsTimepicker
       focus: $.proxy(@show, this)
       click: $.proxy(@show, this)
       blur: $.proxy(@hide, this)
-      
     }
 
     @step    = options.step || @element.data('date-time-step') || 30
     @minTime = options.minTime || @element.data('date-time-min') || 9 * 60
     @maxTime = options.maxTime || @element.data('date-time-max') || 20 * 60
-    
 
     @fillTimes()
     @update()
@@ -64,7 +62,7 @@ class Timepicker extends NativeRailsTimepicker
     e.preventDefault()
     target = $(e.target)
 
-    if target.is 'a' 
+    if target.is 'a'
       @time = target.data('time')
       @setValue()
       @update()
@@ -113,7 +111,7 @@ class Timepicker extends NativeRailsTimepicker
     if e
       e.stopPropagation()
       e.preventDefault()
-    
+
     @element.trigger {
       type: 'show'
       date: @time

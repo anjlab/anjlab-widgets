@@ -3,7 +3,7 @@
   left: 0;
   padding: 4px;
   margin-top: 1px;
-  @include border-radius(4px);  
+  @include border-radius(4px);
 
   >div {
     display: none;
@@ -13,7 +13,7 @@
   .datepicker-years {
     display: block;
   }
-  
+
   table{
     width: 100%;
     margin: 0;
@@ -61,11 +61,11 @@
       }
     }
   }
-  
+
   th.switch {
     width: 145px;
   }
-  
+
   thead tr:first-child th {
     cursor: pointer;
     &:hover {

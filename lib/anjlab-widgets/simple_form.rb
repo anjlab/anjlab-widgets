@@ -27,7 +27,7 @@ module Anjlab
           "data-rails" => true,
           :value => Widgets::format_time(time),
           :required => input_html_options[:required],
-          :class => "#{input_html_options[:time_class] || 'input-small'}"  
+          :class => "#{input_html_options[:time_class] || 'input-small'}"
         }
 
         case input_type
