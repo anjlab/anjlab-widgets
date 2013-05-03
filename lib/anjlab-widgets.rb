@@ -11,6 +11,8 @@ module Anjlab
         "%m/%d/%Y"
       when :es
         "%d/%m/%Y"
+      when :'zh-TW'
+        "%Y-%m-%d"
       else
         "%Y-%m-%d"
       end
