@@ -192,7 +192,7 @@ class Datepicker extends NativeRailsDatepicker
       @element.on {
         focus: $.proxy(@show, this)
         click: $.proxy(@show, this)
-        blur: $.proxy(@hide, this)
+        blur:  $.proxy(@hide, this)
         keyup: $.proxy(@update, this)
       }
     else
@@ -261,9 +261,10 @@ class Datepicker extends NativeRailsDatepicker
       @date = DateTools.today()
 
     if @date != null
-      @viewDate = @date
+      @viewDate = new Date(@date)
     else
       @viewDate = DateTools.today()
+
     @fill()
 
   fillDow: ->
@@ -291,11 +292,10 @@ class Datepicker extends NativeRailsDatepicker
     d = new Date(@viewDate)
     year = d.getFullYear()
     month = d.getMonth()
-    todayDate = DateTools.today()
-    today = todayDate.valueOf()
+    today = DateTools.today().valueOf()
 
     @updateRails()
-    date = if @date != null then @date else todayDate
+    date = if @date != null then @date else DateTools.today()
     currentDate = if @date != null then @date.valueOf() else 0
 
     @picker.find('.datepicker-days th:eq(1)').text(Locales[@locale].dates.months[month]+' '+year)
@@ -376,7 +376,6 @@ class Datepicker extends NativeRailsDatepicker
               month -= 1
             else if target.is('.new')
               month += 1
-
             year = @viewDate.getFullYear()
             @date = new Date(year, month, day,0,0,0,0);
             @viewDate = new Date(year, month, day,0,0,0,0);
