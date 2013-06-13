@@ -33,6 +33,9 @@
     &.new {
       color: $grayLight;
     }
+    &.today {
+      font-weight: bold;
+    }
     &.active,
     &.active:hover {
       @include button-background($btnPrimaryBackground, adjust-hue($btnPrimaryBackground, 20));

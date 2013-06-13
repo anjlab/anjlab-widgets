@@ -291,9 +291,11 @@ class Datepicker extends NativeRailsDatepicker
     d = new Date(@viewDate)
     year = d.getFullYear()
     month = d.getMonth()
+    todayDate = DateTools.today()
+    today = todayDate.valueOf()
 
     @updateRails()
-    date = if @date != null then @date else DateTools.today()
+    date = if @date != null then @date else todayDate
     currentDate = if @date != null then @date.valueOf() else 0
 
     @picker.find('.datepicker-days th:eq(1)').text(Locales[@locale].dates.months[month]+' '+year)
@@ -314,6 +316,9 @@ class Datepicker extends NativeRailsDatepicker
         clsName += ' old'
       else if prevMonth.getMonth() > month
         clsName += ' new'
+
+      if prevMonth.valueOf() == today
+        clsName += ' today'
 
       if prevMonth.valueOf() == currentDate
         clsName += ' active'
