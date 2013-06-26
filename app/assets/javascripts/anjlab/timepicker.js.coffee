@@ -42,10 +42,12 @@ class Timepicker extends NativeRailsTimepicker
       blur: $.proxy(@hide, this)
     }
 
-    @step    = options.step || @element.data('date-time-step') || 30
-    @minTime = options.minTime || @element.data('date-time-min') || 9 * 60
-    @maxTime = options.maxTime || @element.data('date-time-max') || 20 * 60
-
+    @step      = options.step || @element.data('date-time-step') || 30
+    @startTime = options.startTime || (@element.data('date-time-start') || 0) * 60
+    @endTime   = options.endTime || (@element.data('date-time-end') || 24) * 60
+    @minTime   = options.minTime || (@element.data('date-time-min') || 9) * 60
+    @maxTime   = options.maxTime || (@element.data('date-time-max') || 20) * 60
+    
     @fillTimes()
     @update()
     @scrollPlaced = false
@@ -85,9 +87,9 @@ class Timepicker extends NativeRailsTimepicker
     @element.prop('value', @time)
 
   fillTimes: ->
-    timeCnt = 0
+    timeCnt = @startTime
     html = []
-    while timeCnt < 24 * 60
+    while timeCnt < @endTime
       mm = timeCnt % 60
       hh = Math.floor(timeCnt / 60)
       mm = (if mm < 10 then '0' else '') + mm

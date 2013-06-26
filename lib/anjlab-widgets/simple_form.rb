@@ -20,7 +20,7 @@ module Anjlab
           :value => Widgets::format_date(time),
           :required => input_html_options[:required],
           :class => "#{input_html_options[:date_class] || 'input-small'}"
-        }
+        }.merge(input_html_options)
 
         time_data = {
           "data-widget" => "timepicker",
@@ -28,7 +28,7 @@ module Anjlab
           :value => Widgets::format_time(time),
           :required => input_html_options[:required],
           :class => "#{input_html_options[:time_class] || 'input-small'}"
-        }
+        }.merge(input_html_options)
 
         case input_type
         when :datetime, :anjlab_datetime
