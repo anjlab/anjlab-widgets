@@ -3,7 +3,7 @@
   left: 0;
   padding: 4px;
   margin-top: 1px;
-  @include border-radius(4px);
+  border-radius: $border-radius-base;
   height:224px;
   width:70px !important;
   min-width:70px;
@@ -14,20 +14,20 @@
   }
 
   a {
-    @include border-radius(4px);
+    border-radius: $border-radius-base;
     display: block;
     padding: 0 1em;
 
     &:hover {
-      background: $grayLighter;
+      background: $gray-lighter;
       cursor: pointer;
     }
     &.night {
-      color: $grayLight;
+      color: $gray-light;
     }
     &.active,
     &.active:hover {
-      @include button-background($btnPrimaryBackground, adjust-hue($btnPrimaryBackground, 20));
+      @include btn-pseudo-states($btn-primary-color, $btn-primary-bg, $btn-primary-border);
       color: #fff;
       text-shadow: 0 -1px 0 rgba(0,0,0,.25);
     }

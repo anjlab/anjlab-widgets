@@ -3,7 +3,7 @@
   left: 0;
   padding: 4px;
   margin-top: 1px;
-  @include border-radius(4px);
+  border-radius: $border-radius-base;
 
   >div {
     display: none;
@@ -22,45 +22,45 @@
   th {
     text-align: center;
     @include square(20px);
-    @include border-radius(4px);
+    border-radius: $border-radius-base;
   }
   td {
     &.day:hover {
-      background: $grayLighter;
+      background: $gray-lighter;
       cursor: pointer;
     }
     &.old,
     &.new {
-      color: $grayLight;
+      color: $gray-light;
     }
     &.today {
       font-weight: bold;
     }
     &.active,
     &.active:hover {
-      @include button-background($btnPrimaryBackground, adjust-hue($btnPrimaryBackground, 20));
+      @include btn-pseudo-states($btn-primary-color, $btn-primary-bg, $btn-primary-border);
       color: #fff;
       text-shadow: 0 -1px 0 rgba(0,0,0,.25);
     }
     span {
       display: block;
-      width: 47px;
+      width: 54px;
       height: 54px;
       line-height: 54px;
       float: left;
       margin: 2px;
       cursor: pointer;
-      @include border-radius(4px);
+      border-radius: $border-radius-base;
       &:hover {
-        background: $grayLighter;
+        background: $gray-lighter;
       }
       &.active {
-        @include button-background($btnPrimaryBackground, adjust-hue($btnPrimaryBackground, 20));
+        @include btn-pseudo-states($btn-primary-color, $btn-primary-bg, $btn-primary-border);
         color: #fff;
         text-shadow: 0 -1px 0 rgba(0,0,0,.25);
       }
       &.old {
-        color: $grayLight;
+        color: $gray-light;
       }
     }
   }
@@ -72,7 +72,19 @@
   thead tr:first-child th {
     cursor: pointer;
     &:hover {
-      background: $grayLighter;
+      background: $gray-lighter;
+    }
+  }
+
+  .icon-left {
+    &:before {
+      content: '\2039';// SINGLE LEFT-POINTING ANGLE QUOTATION MARK (U+2039)
+    }
+  }
+
+  .icon-right {
+    &:before {
+      content: '\203a';// SINGLE RIGHT-POINTING ANGLE QUOTATION MARK (U+203A)
     }
   }
 }

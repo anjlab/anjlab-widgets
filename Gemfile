@@ -12,4 +12,4 @@ group :assets do
   gem 'jquery-rails'
 end
 
-gem 'anjlab-bootstrap-rails', require: 'bootstrap-rails'
+gem 'anjlab-bootstrap-rails', require: 'bootstrap-rails', path: '~/Projects/bootstrap-rails'
