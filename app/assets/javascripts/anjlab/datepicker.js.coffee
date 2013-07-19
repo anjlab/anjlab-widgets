@@ -186,7 +186,7 @@ class Datepicker extends NativeRailsDatepicker
     }
 
     @isInput = @element.is('input');
-    @component = if @element.is('.date') then @element.find('.add-on') else false;
+    @component = if !@isInput && @element.is('.date') then @element.find('.add-on') else false;
 
     if @isInput
       @element.on {
