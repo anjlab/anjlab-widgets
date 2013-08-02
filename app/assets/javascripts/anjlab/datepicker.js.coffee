@@ -231,7 +231,6 @@ class Datepicker extends NativeRailsDatepicker
     @showMode()
     $(document).off('mousedown', @hide) if !@isInput
 
-    @setValue()
     @element.trigger
       type: 'hide'
       date: @date
@@ -240,10 +239,10 @@ class Datepicker extends NativeRailsDatepicker
     formated = DateTools.formatDate(@date, @format)
     if !@isInput
       if @component
-        @element.find('input').prop('value', formated)
+        @element.find('input').val(formated).change()
       @element.data('date', formated)
     else
-      @element.prop('value', formated)
+      @element.val(formated).change()
 
   place: ->
     offset = if @component then @component.offset() else @element.offset()
