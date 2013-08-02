@@ -84,7 +84,7 @@ class Timepicker extends NativeRailsTimepicker
     @picker.find("a[data-time='#{@time}']").addClass('active')
 
   setValue: ->
-    @element.prop('value', @time)
+    @element.val(@time).change()
 
   fillTimes: ->
     timeCnt = @startTime
@@ -130,7 +130,7 @@ class Timepicker extends NativeRailsTimepicker
     @picker.hide()
     $(window).off 'resize', @place
 
-    @setValue()
+    # @setValue()
     @element.trigger {
       type: 'hide'
       date: @time
