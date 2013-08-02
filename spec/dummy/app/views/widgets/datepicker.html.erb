@@ -8,7 +8,11 @@
 <input data-widget='datepicker' data-date-allow-blank='false'>
 
 <script>
+
+
 $('.js-change').change(function(){
   console.log($('.js-change').val())
+  var picker = $('.js-change').data('datepicker')
+  console.log(picker.getISOString())
 })
 </script>

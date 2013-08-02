@@ -143,6 +143,19 @@ DateTools.template = '<div class="datepicker dropdown-menu">'+
             '</div>'+
           '</div>'
 
+convertToNative = ($input, options)->
+  value = $input.attr('value')
+  $input.prop("type", "date")
+  if value && value.length > 0
+    locale = options.locale || $input.data('date-locale') || DateTools.getLocale()
+    format = DateTools.parseFormat(options.format || $input.data('date-format') || Locales[locale].dates.format)
+    date   = DateTools.parseDate(value, format)
+    value  = DateTools.formatDate(date, {
+      separator: '-'
+      parts: ["yyyy", "mm", "dd"]
+    })
+    $input.prop('value', value)
+
 class NativeRailsDatepicker
   constructor: (element, options)->
     @element = $(element)
@@ -160,6 +173,9 @@ class NativeRailsDatepicker
     }
 
     @updateRails()
+
+  getISOString: ->
+    @element.val()
 
   updateRails: ->
     return if !@rails
@@ -249,6 +265,12 @@ class Datepicker extends NativeRailsDatepicker
     @picker.css
       top: offset.top + @height
       left: offset.left
+
+  getISOString: ->
+    DateTools.formatDate(@date, {
+      separator: '-'
+      parts: ["yyyy", "mm", "dd"]
+    })
 
   update: ->
     @date = DateTools.parseDate(
@@ -395,19 +417,6 @@ class Datepicker extends NativeRailsDatepicker
     @picker.find('>div').hide().filter('.datepicker-'+DateTools.modes[this.viewMode].clsName).show()
 
 nativePicker = false
-
-convertToNative = ($input, options)->
-  value = $input.attr('value')
-  $input.prop("type", "date")
-  if value && value.length > 0
-    locale = options.locale || $input.data('date-locale') || DateTools.getLocale()
-    format  = DateTools.parseFormat(options.format || $input.data('date-format') || Locales[locale].dates.format);
-    date = DateTools.parseDate(value, format)
-    value = DateTools.formatDate(date, {
-      separator: '-'
-      parts: ["yyyy", "mm", "dd"]
-    })
-    $input.prop('value', value)
 
 $.fn.datepicker = (option) ->
   @each ->
