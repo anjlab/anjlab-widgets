@@ -1,5 +1,5 @@
 module Anjlab
   module Widgets
-    VERSION = "1.0.10"
+    VERSION = "3.0.0"
   end
 end
