@@ -38,7 +38,6 @@
     }
     &.active,
     &.active:hover {
-      @include btn-pseudo-states($btn-primary-color, $btn-primary-bg, $btn-primary-border);
       color: #fff;
       text-shadow: 0 -1px 0 rgba(0,0,0,.25);
     }
@@ -55,7 +54,6 @@
         background: $gray-lighter;
       }
       &.active {
-        @include btn-pseudo-states($btn-primary-color, $btn-primary-bg, $btn-primary-border);
         color: #fff;
         text-shadow: 0 -1px 0 rgba(0,0,0,.25);
       }
@@ -88,6 +86,9 @@
     }
   }
 }
+
+@include button-variant(".datepicker td.active,.datepicker td.active:hover, .datepicker span.active", $btn-primary-color, $btn-primary-bg, $btn-primary-border);
+
 .input-append,
 .input-prepend {
   &.date {
