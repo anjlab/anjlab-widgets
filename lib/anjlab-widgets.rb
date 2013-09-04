@@ -17,7 +17,7 @@ module Anjlab
       when :'zh-TW'
         "%Y-%m-%d"
       when :ja
-        "%Y年%m月%d日"
+        "%Y/%m/%d"
       else
         "%Y-%m-%d"
       end
