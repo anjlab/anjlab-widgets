@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 require "anjlab-widgets/version"
 require "anjlab-widgets/engine"
 
@@ -15,6 +16,8 @@ module Anjlab
         "%d/%m/%Y"
       when :'zh-TW'
         "%Y-%m-%d"
+      when :ja
+        "%Y/%m/%d"
       else
         "%Y-%m-%d"
       end
