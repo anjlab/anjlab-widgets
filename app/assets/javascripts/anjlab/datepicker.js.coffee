@@ -211,7 +211,8 @@ class Datepicker extends NativeRailsDatepicker
       else
         @element.on 'click', $.proxy(@show, this)
 
-    @viewMode = 0;
+    @startMode = options.startMode || 0
+    @viewMode = @startMode
     @weekStart = options.weekStart || @element.data('date-weekstart') || Locales[@locale].dates.weekStart
     @weekEnd = if this.weekStart == 0 then 6 else @weekStart - 1
     @fillDow()
@@ -237,7 +238,7 @@ class Datepicker extends NativeRailsDatepicker
   hide: ->
     @picker.hide()
     $(window).off 'resize', @place
-    @viewMode = 0
+    @viewMode = @startMode
     @showMode()
     $(document).off('mousedown', @hide) if !@isInput
 
