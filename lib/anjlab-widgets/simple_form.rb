@@ -7,7 +7,7 @@ module Anjlab
       end
 
       def input
-        time = options[:value] || @builder.object[attribute_name]
+        time = options[:value] || @builder.object.send(attribute_name)
 
         html = ''.html_safe
 
