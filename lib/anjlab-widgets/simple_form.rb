@@ -19,7 +19,8 @@ module Anjlab
           "data-date-allow-blank" => allow_blank,
           :value => Widgets::format_date(time),
           :required => input_html_options[:required],
-          :class => "#{input_html_options[:date_class] || 'input-small'}"
+          :class => "#{input_html_options[:date_class] || 'input-small'}",
+          :placeholder => "#{input_html_options[:date_placeholder]}"
         }.merge(input_html_options)
 
         time_data = {
@@ -27,7 +28,8 @@ module Anjlab
           "data-rails" => true,
           :value => Widgets::format_time(time),
           :required => input_html_options[:required],
-          :class => "#{input_html_options[:time_class] || 'input-small'}"
+          :class => "#{input_html_options[:time_class] || 'input-small'}",
+          :placeholder => "#{input_html_options[:time_placeholder]}"
         }.merge(input_html_options)
 
         case input_type
