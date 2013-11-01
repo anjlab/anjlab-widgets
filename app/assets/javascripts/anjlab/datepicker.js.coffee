@@ -124,9 +124,9 @@ DateTools =
 
   headTemplate: '<thead>'+
             '<tr>'+
-              '<th class="prev"><i class="icon-arrow-left glyphicon glyphicon-chevron-left"/></th>'+
+              '<th class="prev"><i class="glyphicon glyphicon-chevron-left"/></th>'+
               '<th colspan="5" class="switch"></th>'+
-              '<th class="next"><i class="icon-arrow-right glyphicon glyphicon-chevron-right"/></th>'+
+              '<th class="next"><i class="glyphicon glyphicon-chevron-right"/></th>'+
             '</tr>'+
           '</thead>'
 
@@ -180,14 +180,14 @@ class NativeRailsDatepicker
     else
       parent.find('.js-aw-1i').val(@date.getFullYear())
       parent.find('.js-aw-2i').val(@date.getMonth() + 1)
-      parent.find('.js-aw-3i').val(@date.getDate())      
+      parent.find('.js-aw-3i').val(@date.getDate())
 
 
 class Datepicker extends NativeRailsDatepicker
 
   constructor: (element, options)->
     super(element, options)
-    @locale  = options.locale || @element.data('date-locale') || DateTools.getLocale() 
+    @locale  = options.locale || @element.data('date-locale') || DateTools.getLocale()
     @format  = DateTools.parseFormat(options.format || @element.data('date-format') || Locales[@locale].dates.format);
     @allowBlank = options.allowBlank ? @element.data('date-allow-blank') ? true
     @picker  = $(DateTools.template).appendTo('body').on {
