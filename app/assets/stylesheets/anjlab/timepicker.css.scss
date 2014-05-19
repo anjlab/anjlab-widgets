@@ -33,4 +33,6 @@
   }
 }
 
-@include button-variant(".timepicker a.active,.timepicker a.active:hover", $btn-primary-color, $btn-primary-bg, $btn-primary-border);
+.timepicker a.active,.timepicker a.active:hover {
+  @include button-variant($btn-primary-color, $btn-primary-bg, $btn-primary-border);
+}

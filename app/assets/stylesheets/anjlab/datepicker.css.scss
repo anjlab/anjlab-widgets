@@ -75,7 +75,9 @@
   }
 }
 
-@include button-variant(".datepicker td.active,.datepicker td.active:hover, .datepicker span.active", $btn-primary-color, $btn-primary-bg, $btn-primary-border);
+.datepicker td.active,.datepicker td.active:hover, .datepicker span.active {
+  @include button-variant($btn-primary-color, $btn-primary-bg, $btn-primary-border);
+}
 
 .input-append,
 .input-prepend {
