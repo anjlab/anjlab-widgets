@@ -6,31 +6,32 @@ module Anjlab
         attribute_name
       end
 
-      def input
+      def input(wrapper_options)
         time = options[:value] || @builder.object.send(attribute_name)
 
         html = ''.html_safe
 
         allow_blank = !options[:required]
+        source_options = merge_wrapper_options(input_html_options, wrapper_options)
 
         date_data = {
           "data-widget" => "datepicker",
           "data-rails" => true,
           "data-date-allow-blank" => allow_blank,
           :value => Widgets::format_date(time),
-          :required => input_html_options[:required],
-          :class => "#{input_html_options[:date_class] || 'input-small'}",
-          :placeholder => "#{input_html_options[:date_placeholder]}"
-        }.merge(input_html_options)
+          :required => source_options[:required],
+          :class => "#{source_options[:date_class] || 'input-small'}",
+          :placeholder => "#{source_options[:date_placeholder]}"
+        }.merge(source_options)
 
         time_data = {
           "data-widget" => "timepicker",
           "data-rails" => true,
           :value => Widgets::format_time(time),
-          :required => input_html_options[:required],
-          :class => "#{input_html_options[:time_class] || 'input-small'}",
-          :placeholder => "#{input_html_options[:time_placeholder]}"
-        }.merge(input_html_options)
+          :required => source_options[:required],
+          :class => "#{source_options[:time_class] || 'input-small'}",
+          :placeholder => "#{source_options[:time_placeholder]}"
+        }.merge(source_options)
 
         case input_type
         when :datetime, :anjlab_datetime
